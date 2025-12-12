@@ -1,0 +1,9 @@
+
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="TravelAutomationSuite">
+  <test name="FlightTests">
+    <classes>
+      <class name="com.akhila.infrrd.travel_pom_automation.FlightSearchTest"/>
+    </classes>
+  </test>
+</suite>
