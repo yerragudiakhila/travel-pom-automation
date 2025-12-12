@@ -11,7 +11,7 @@ public class BaseTest {
     @BeforeMethod(alwaysRun = true)
     public void setUp() {
         driver = DriverFactory.getDriver();
-        driver.get("https://www.goibibo.com/"); // change if you use a different URL / env
+        driver.get("https://www.goibibo.com/"); // change if you use a different URL
     }
 
     @AfterMethod(alwaysRun = true)

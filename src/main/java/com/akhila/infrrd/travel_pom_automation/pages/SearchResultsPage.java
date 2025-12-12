@@ -21,7 +21,7 @@ public class SearchResultsPage {
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(25));
     }
 
-    // ------------------ CHECK RESULTS LOADED ------------------
+    // CHECK RESULTS LOADED
     public boolean isResultsLoaded() {
         try {
             wait.until(ExpectedConditions.or(
@@ -29,16 +29,16 @@ public class SearchResultsPage {
                     ExpectedConditions.presenceOfElementLocated(resultCards)
             ));
 
-            System.out.println("✔ Results page loaded");
+            System.out.println(" Results page loaded");
             return true;
 
         } catch (Exception e) {
-            System.out.println("❌ Results NOT loaded: " + e.getMessage());
+            System.out.println(" Results NOT loaded: " + e.getMessage());
             return false;
         }
     }
 
-    // ------------------ PRINT CHEAPEST FLIGHTS ------------------
+    //  PRINT CHEAPEST FLIGHTS
     public void printCheapestFlights() {
         try {
             wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(resultCards));
@@ -46,25 +46,25 @@ public class SearchResultsPage {
             List<WebElement> cards = driver.findElements(resultCards);
 
             if (cards.isEmpty()) {
-                System.out.println("❌ No flights found");
+                System.out.println(" No flights found");
                 return;
             }
 
-            System.out.println("✔ Total flights found: " + cards.size());
+            System.out.println(" Total flights found: " + cards.size());
 
             WebElement cheapest = cards.get(0);
-            System.out.println("💸 Cheapest Flight:\n" + cheapest.getText());
+            System.out.println(" Cheapest Flight:\n" + cheapest.getText());
 
             if (cards.size() > 1) {
                 WebElement secondCheapest = cards.get(1);
-                System.out.println("💸 Second Cheapest:\n" + secondCheapest.getText());
+                System.out.println(" Second Cheapest:\n" + secondCheapest.getText());
             }
 
         } catch (Exception e) {
-            System.out.println("❌ Error reading flight results: " + e.getMessage());
+            System.out.println(" Error reading flight results: " + e.getMessage());
         }
     }
-    // ------------------ GET ALL FLIGHT PRICES ------------------
+    // GET ALL FLIGHT PRICES
     public List<Integer> getAllFlightPrices() {
         List<WebElement> cards = driver.findElements(By.cssSelector("div.listingCard"));
 
@@ -81,7 +81,7 @@ public class SearchResultsPage {
         return prices;
     }
 
-    // ------------------ CHECK ASC SORTING ------------------
+    //CHECK ASC SORTING
     public boolean isListSortedAscending(List<Integer> list) {
         for (int i = 0; i < list.size() - 1; i++) {
             if (list.get(i) > list.get(i + 1)) {

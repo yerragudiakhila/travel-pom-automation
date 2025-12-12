@@ -11,16 +11,15 @@ import java.util.ArrayList;
 
 public class FlightSearchTest extends BaseTest {
 
-    // -----------------------------------------------------------
-    //  TEST 1: Full Search Flow + New Tab + Google Title Check
-    // -----------------------------------------------------------
+
+
     @Test
     public void fullFlowTest() throws InterruptedException {
 
         HomePage home = new HomePage(DriverFactory.getDriver());
         SearchResultsPage results = new SearchResultsPage(DriverFactory.getDriver());
 
-        System.out.println("========== TEST STARTED ==========");
+        System.out.println("TEST STARTED ");
 
         home.clearPopups();
         home.selectOneWayTrip();
@@ -29,7 +28,7 @@ public class FlightSearchTest extends BaseTest {
         home.selectDateNextMonth(12);
         home.clickSearchButton();
 
-        Assert.assertTrue(results.isResultsLoaded(), "❌ Flight results did NOT load!");
+        Assert.assertTrue(results.isResultsLoaded(), " Flight results did NOT load!");
 
         results.printCheapestFlights();
 
@@ -48,24 +47,22 @@ public class FlightSearchTest extends BaseTest {
         String googleTitle = DriverFactory.getDriver().getTitle();
         Assert.assertTrue(
                 googleTitle.toLowerCase().contains("google"),
-                "❌ Google title mismatch!"
+                " Google title mismatch!"
         );
 
-        System.out.println("✔ Google title verified successfully");
-        System.out.println("========== TEST COMPLETED SUCCESSFULLY ==========");
+        System.out.println(" Google title verified successfully");
+        System.out.println("TEST COMPLETED SUCCESSFULLY ");
     }
 
+    //   Validate PRICE SORTING (Low → High)
 
-    // -----------------------------------------------------------
-    //  TEST 2: Validate PRICE SORTING (Low → High)
-    // -----------------------------------------------------------
     @Test
     public void validatePriceSorting() throws InterruptedException {
 
         HomePage home = new HomePage(DriverFactory.getDriver());
         SearchResultsPage results = new SearchResultsPage(DriverFactory.getDriver());
 
-        System.out.println("========== PRICE SORTING TEST ==========");
+        System.out.println("PRICE SORTING TEST ");
 
         home.clearPopups();
         home.selectOneWayTrip();
@@ -74,7 +71,7 @@ public class FlightSearchTest extends BaseTest {
         home.selectDateNextMonth(12);
         home.clickSearchButton();
 
-        Assert.assertTrue(results.isResultsLoaded(), "❌ Results did NOT load!");
+        Assert.assertTrue(results.isResultsLoaded(), " Results did NOT load!");
 
         System.out.println("✔ Results loaded");
 
@@ -85,10 +82,10 @@ public class FlightSearchTest extends BaseTest {
 
         // Check if sorted ascending
         Assert.assertTrue(results.isListSortedAscending(prices),
-                "❌ Prices are NOT sorted from Low → High");
+                " Prices are NOT sorted from Low → High");
 
         System.out.println("✔ Price sorting validated successfully");
-        System.out.println("========== PRICE SORTING TEST COMPLETED ==========");
+        System.out.println("PRICE SORTING TEST COMPLETED");
     }
 
 }

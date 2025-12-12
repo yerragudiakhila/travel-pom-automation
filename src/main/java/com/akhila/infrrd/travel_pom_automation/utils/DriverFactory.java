@@ -15,7 +15,7 @@ public class DriverFactory {
             options.addArguments("--start-maximized");
             options.addArguments("--disable-notifications");
             options.addArguments("--remote-allow-origins=*");
-            // options.addArguments("--headless=new"); // uncomment if headless is desired
+
             tlDriver.set(new ChromeDriver(options));
         }
         return tlDriver.get();

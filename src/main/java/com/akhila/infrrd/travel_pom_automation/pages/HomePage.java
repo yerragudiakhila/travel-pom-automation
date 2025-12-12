@@ -28,27 +28,27 @@ public class HomePage {
                 .forEach(e => e.remove());
             """);
 
-            System.out.println("✔ Popups cleared");
+            System.out.println(" Popups cleared");
         } catch (Exception e) {
-            System.out.println("⚠ No popups found");
+            System.out.println(" No popups found");
         }
     }
 
-    // ------------------ LOCATORS ------------------
+    //LOCATORS
     private By suggestionFirst = By.xpath("(//ul/li)[1]");
     private By oneWay = By.xpath("//p[text()='One-way']/ancestor::div[contains(@class,'radio')]");
 
-    // ------------------ ONE WAY ------------------
+    //  ONE WAY
     public void selectOneWayTrip() {
         try {
             wait.until(ExpectedConditions.elementToBeClickable(oneWay)).click();
-            System.out.println("✔ One-way selected");
+            System.out.println(" One-way selected");
         } catch (Exception e) {
-            System.out.println("⚠ One-way already selected");
+            System.out.println(" One-way already selected");
         }
     }
 
-    // ------------------ SOURCE CITY ------------------
+    // SOURCE CITY
     public void enterSource(String city) {
 
         By box = By.xpath("//label[@for='fromCity']");
@@ -69,10 +69,10 @@ public class HomePage {
         field.sendKeys(city);
 
         wait.until(ExpectedConditions.elementToBeClickable(suggestionFirst)).click();
-        System.out.println("✔ Source: " + city);
+        System.out.println(" Source: " + city);
     }
 
-    // ------------------ DESTINATION CITY ------------------
+    // DESTINATION CITY
     public void enterDestination(String city) {
 
         By box = By.xpath("//label[@for='toCity']");
@@ -93,10 +93,10 @@ public class HomePage {
         field.sendKeys(city);
 
         wait.until(ExpectedConditions.elementToBeClickable(suggestionFirst)).click();
-        System.out.println("✔ Destination: " + city);
+        System.out.println(" Destination: " + city);
     }
 
-    // ------------------ REMOVE OVERLAYS ------------------
+    //  REMOVE OVERLAYS
     private void removeOverlays() {
         try {
             JavascriptExecutor js = (JavascriptExecutor) driver;
@@ -107,34 +107,34 @@ public class HomePage {
         } catch (Exception ignored) {}
     }
 
-    // ------------------ DATE SELECTION ------------------
+    // DATE SELECTION
     public void selectDateNextMonth(int day) {
 
         WebElement departureBox = wait.until(ExpectedConditions.elementToBeClickable(
                 By.xpath("//span[contains(text(),'Departure')]/ancestor::div[contains(@class,'fsw_inputBox')]")
         ));
         departureBox.click();
-        System.out.println("✔ Calendar opened");
+        System.out.println(" Calendar opened");
 
         WebElement nextArrow = wait.until(ExpectedConditions.elementToBeClickable(
                 By.xpath("(//span[contains(@class,'DayPicker-NavButton--next')])[1]")
         ));
         nextArrow.click();
-        System.out.println("✔ Next month opened");
+        System.out.println(" Next month opened");
 
         String xpath = "//div[contains(@class,'DayPicker-Day') and contains(@aria-label,'" + day + "')]";
         WebElement date = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(xpath)));
 
         ((JavascriptExecutor) driver).executeScript("arguments[0].click();", date);
-        System.out.println("✔ Selected date: " + day);
+        System.out.println(" Selected date: " + day);
 
         driver.findElement(By.tagName("body")).click();
-        System.out.println("✔ Calendar closed");
+        System.out.println(" Calendar closed");
 
         sleepSafe(1500);
     }
 
-    // ------------------ CLICK SEARCH ------------------
+    //  CLICK SEARCH
     public void clickSearchButton() {
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(25));
@@ -153,20 +153,20 @@ public class HomePage {
 
             try {
                 btn.click();
-                System.out.println("✔ SEARCH clicked normally");
+                System.out.println(" SEARCH clicked normally");
             } catch (Exception e) {
                 js.executeScript("arguments[0].click();", btn);
-                System.out.println("✔ SEARCH clicked via JavaScript");
+                System.out.println(" SEARCH clicked via JavaScript");
             }
 
             sleepSafe(2000);
 
         } catch (Exception e) {
-            System.out.println("❌ Could not click SEARCH button: " + e.getMessage());
+            System.out.println(" Could not click SEARCH button: " + e.getMessage());
         }
     }
 
-    // ------------------ SAFE SLEEP ------------------
+    //  SAFE SLEEP
     private void sleepSafe(long time) {
         try {
             sleep(time);
