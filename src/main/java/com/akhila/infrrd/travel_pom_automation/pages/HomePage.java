@@ -17,7 +17,7 @@ public class HomePage {
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(20));
     }
 
-    // ------------------ POPUP HANDLER ------------------
+    //  POPUP HANDLER 
     public void clearPopups() {
         try {
             sleep(1000);
